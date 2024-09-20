@@ -106,7 +106,7 @@ public class Zeitrechner extends JFrame {
         if(ueberstundenInMinuten > 0) {
             ueberstundenLabel.setText("Ueberstunden: " + ueberstundenInMinuten + " Minuten");
         }else{
-            ueberstundenLabel.setText("Du hast keine Ueberstunden");
+            ueberstundenLabel.setText("Du hast  Ueberstunden");
         }
 
     }
