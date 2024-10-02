@@ -87,6 +87,7 @@ public class Zeitrechner extends JFrame {
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
                 new Zeitrechner().setVisible(true);
+                new Musik();
             }
         });
     }
