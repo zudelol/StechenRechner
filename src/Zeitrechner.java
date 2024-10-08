@@ -8,6 +8,7 @@ public class Zeitrechner extends JFrame {
     private JTextField ankunftsStundenField, ankunftsMinutenField, bleibZeitField, pausenZeitField;
     private JLabel ergebnisLabel, ueberstundenLabel, titleLabelMain;
     private Container con;
+    private JButton ueberstundenBalanceButton, zeitDesStechensButton;
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> new Zeitrechner());
@@ -49,8 +50,27 @@ public class Zeitrechner extends JFrame {
         // Füge den Titel dem Panel hinzu
         backgroundPanel.add(titleLabelMain);
 
+
         // Fenster sichtbar machen
         setVisible(true);
+
+        ueberstundenBalanceButton = new JButton("") {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                drawTextWithOutline2(g, "Ueberstundenbalance", 50, 100);
+            }
+        };
+        ueberstundenBalanceButton.setOpaque(false);
+        ueberstundenBalanceButton.setContentAreaFilled(false);
+        ueberstundenBalanceButton.setBorderPainted(false);
+
+        ueberstundenBalanceButton.setForeground(new Color(223, 149, 70));
+        ueberstundenBalanceButton.setBounds(160, 205, 460, 300);
+        ueberstundenBalanceButton.addActionListener(e -> {
+
+        });
+        backgroundPanel.add(ueberstundenBalanceButton);
     }
 
     public void drawTextWithOutline(Graphics g, String text, int x, int y) {
@@ -58,6 +78,25 @@ public class Zeitrechner extends JFrame {
 
         // Verwende einen pixeligen Font
         Font font = loadCustomFont("C:/Users/Alina Baum/Downloads/invasion2000//INVASION2000.TTF", Font.BOLD | Font.ITALIC, 65);
+        g2d.setFont(font);
+
+        // Zeichne den Text für den Umriss - mehrfach leicht versetzt
+        g2d.setColor(new Color(0x2D2D4C));
+        g2d.drawString(text, x - 2, y - 2); // Oben links
+        g2d.drawString(text, x + 2, y - 2); // Oben rechts
+        g2d.drawString(text, x - 2, y + 3); // Unten links
+        g2d.drawString(text, x + 2, y + 3); // Unten rechts
+
+        // Zeichne den Haupttext darüber
+        g2d.setColor(new Color(223, 149, 70)); // Pink
+        g2d.drawString(text, x, y);
+    }
+
+    public void drawTextWithOutline2(Graphics g, String text, int x, int y) {
+        Graphics2D g2d = (Graphics2D) g;
+
+        // Verwende einen pixeligen Font
+        Font font = loadCustomFont("C:/Users/Alina Baum/Downloads/invasion2000//INVASION2000.TTF", Font.BOLD | Font.ITALIC, 30);
         g2d.setFont(font);
 
         // Zeichne den Text für den Umriss - mehrfach leicht versetzt
