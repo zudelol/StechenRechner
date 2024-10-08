@@ -23,10 +23,10 @@ public class Zeitrechner extends JFrame {
         setLayout(null);
         setLocationRelativeTo(null);
 
-        // Hintergrundbild laden
+
         ImageIcon backgroundImage = new ImageIcon("background.png");
 
-        // Panel mit Hintergrundbild
+
         JPanel backgroundPanel = new JPanel() {
             @Override
             protected void paintComponent(Graphics g) {
@@ -34,10 +34,10 @@ public class Zeitrechner extends JFrame {
                 g.drawImage(backgroundImage.getImage(), 0, 0, getWidth(), getHeight(), this);
             }
         };
-        backgroundPanel.setLayout(null); // Ohne Layout-Manager
-        setContentPane(backgroundPanel); // Setzt den Hintergrund
+        backgroundPanel.setLayout(null);
+        setContentPane(backgroundPanel);
 
-        // Titel mit Outline
+
         titleLabelMain = new JLabel("") {
             @Override
             protected void paintComponent(Graphics g) {
@@ -45,13 +45,13 @@ public class Zeitrechner extends JFrame {
                 drawTextWithOutline(g, "Stechenrechner", 50, 100);
             }
         };
-        titleLabelMain.setBounds(50, 50, 700, 200); // Position und Größe des Titels
+        titleLabelMain.setBounds(50, 50, 700, 200);
 
-        // Füge den Titel dem Panel hinzu
+
         backgroundPanel.add(titleLabelMain);
 
 
-        // Fenster sichtbar machen
+
         setVisible(true);
 
         ueberstundenBalanceButton = new JButton("") {
@@ -68,7 +68,7 @@ public class Zeitrechner extends JFrame {
         ueberstundenBalanceButton.setForeground(new Color(223, 149, 70));
         ueberstundenBalanceButton.setBounds(160, 205, 460, 300);
         ueberstundenBalanceButton.addActionListener(e -> {
-
+            ueberstundenBalanceScreen();
         });
         backgroundPanel.add(ueberstundenBalanceButton);
     }
@@ -76,38 +76,38 @@ public class Zeitrechner extends JFrame {
     public void drawTextWithOutline(Graphics g, String text, int x, int y) {
         Graphics2D g2d = (Graphics2D) g;
 
-        // Verwende einen pixeligen Font
+
         Font font = loadCustomFont("C:/Users/Alina Baum/Downloads/invasion2000//INVASION2000.TTF", Font.BOLD | Font.ITALIC, 65);
         g2d.setFont(font);
 
-        // Zeichne den Text für den Umriss - mehrfach leicht versetzt
+
         g2d.setColor(new Color(0x2D2D4C));
         g2d.drawString(text, x - 2, y - 2); // Oben links
         g2d.drawString(text, x + 2, y - 2); // Oben rechts
         g2d.drawString(text, x - 2, y + 3); // Unten links
         g2d.drawString(text, x + 2, y + 3); // Unten rechts
 
-        // Zeichne den Haupttext darüber
-        g2d.setColor(new Color(223, 149, 70)); // Pink
+
+        g2d.setColor(new Color(223, 149, 70));
         g2d.drawString(text, x, y);
     }
 
     public void drawTextWithOutline2(Graphics g, String text, int x, int y) {
         Graphics2D g2d = (Graphics2D) g;
 
-        // Verwende einen pixeligen Font
+
         Font font = loadCustomFont("C:/Users/Alina Baum/Downloads/invasion2000//INVASION2000.TTF", Font.BOLD | Font.ITALIC, 30);
         g2d.setFont(font);
 
-        // Zeichne den Text für den Umriss - mehrfach leicht versetzt
+
         g2d.setColor(new Color(0x2D2D4C));
         g2d.drawString(text, x - 2, y - 2); // Oben links
         g2d.drawString(text, x + 2, y - 2); // Oben rechts
         g2d.drawString(text, x - 2, y + 3); // Unten links
         g2d.drawString(text, x + 2, y + 3); // Unten rechts
 
-        // Zeichne den Haupttext darüber
-        g2d.setColor(new Color(223, 149, 70)); // Pink
+
+        g2d.setColor(new Color(223, 149, 70));
         g2d.drawString(text, x, y);
     }
 
@@ -152,6 +152,10 @@ public class Zeitrechner extends JFrame {
         } else {
             ueberstundenLabel.setText("Du hast keine Ueberstunden");
         }
+    }
+
+    public void ueberstundenBalanceScreen() {
+
     }
 
 }
