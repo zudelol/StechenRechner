@@ -9,6 +9,12 @@ public class Zeitrechner extends JFrame {
     private JLabel ergebnisLabel, ueberstundenLabel, titleLabelMain;
     private Container con;
 
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -> new Zeitrechner());
+        new Musik();
+    }
+
+
     public Zeitrechner() {
         setTitle("Stechenrechner");
         setSize(800, 600);
@@ -77,8 +83,36 @@ public class Zeitrechner extends JFrame {
             return new Font("Serif", Font.PLAIN, 12);
         }
     }
+    public void berechneFeierabendZeit() {
+        int ankunftsStunden = Integer.parseInt(ankunftsStundenField.getText());
+        int ankunftsMinuten = Integer.parseInt(ankunftsMinutenField.getText());
+        double bleibZeit = Double.parseDouble(bleibZeitField.getText());
+        double pausenZeit = Double.parseDouble(pausenZeitField.getText());
 
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> new Zeitrechner());
+        double gesamtZeit = bleibZeit + pausenZeit;
+        int gesamtStunden = (int) gesamtZeit;
+        int gesamtMinuten = (int) ((gesamtZeit - gesamtStunden) * 60);
+
+        int endMinuten = ankunftsMinuten + gesamtMinuten;
+        int extraStunden = endMinuten / 60;
+        endMinuten = endMinuten % 60;
+
+        int endStunden = ankunftsStunden + gesamtStunden + extraStunden;
+
+        ergebnisLabel.setText("Feierabend um " + endStunden + ":" + (endMinuten < 10 ? "0" + endMinuten : endMinuten) + " Uhr.");
     }
+
+    public void ueberstunden() {
+        double vorgegebeneArbeitszeit = 7.6 * 60;
+        double gesamteArbeitszeit = Double.parseDouble(bleibZeitField.getText());
+        int arbeitszeitInMinuten = (int) (gesamteArbeitszeit * 60);
+        int ueberstundenInMinuten = (int) (arbeitszeitInMinuten - vorgegebeneArbeitszeit);
+
+        if (ueberstundenInMinuten > 0) {
+            ueberstundenLabel.setText("Ueberstunden: " + ueberstundenInMinuten + " Minuten");
+        } else {
+            ueberstundenLabel.setText("Du hast keine Ueberstunden");
+        }
+    }
+
 }
