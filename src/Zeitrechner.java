@@ -9,11 +9,13 @@ public class Zeitrechner extends JFrame {
     private JLabel ergebnisLabel, ueberstundenLabel, titleLabelMain;
     private Container con;
     private JButton ueberstundenBalanceButton, zeitDesStechensButton;
+    private JPanel backgroundPanel, backgroundPanelStechen;
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> new Zeitrechner());
         new Musik();
     }
+
 
 
     public Zeitrechner() {
@@ -23,9 +25,7 @@ public class Zeitrechner extends JFrame {
         setLayout(null);
         setLocationRelativeTo(null);
 
-
         ImageIcon backgroundImage = new ImageIcon("background.png");
-
 
         JPanel backgroundPanel = new JPanel() {
             @Override
@@ -46,12 +46,7 @@ public class Zeitrechner extends JFrame {
             }
         };
         titleLabelMain.setBounds(50, 50, 700, 200);
-
-
         backgroundPanel.add(titleLabelMain);
-
-
-
         setVisible(true);
 
         ueberstundenBalanceButton = new JButton("") {
@@ -66,16 +61,38 @@ public class Zeitrechner extends JFrame {
         ueberstundenBalanceButton.setBorderPainted(false);
 
         ueberstundenBalanceButton.setForeground(new Color(223, 149, 70));
-        ueberstundenBalanceButton.setBounds(160, 205, 460, 300);
+        ueberstundenBalanceButton.setBounds(160, 170, 460, 300);
         ueberstundenBalanceButton.addActionListener(e -> {
+
+            ueberstundenBalanceScreen();
+        });
+
+
+        zeitDesStechensButton = new JButton("") {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                drawTextWithOutline2(g, "Zeit des Stechens", 50, 150);
+            }
+        };
+        zeitDesStechensButton.setOpaque(false);
+        zeitDesStechensButton.setContentAreaFilled(false);
+        zeitDesStechensButton.setBorderPainted(false);
+
+        zeitDesStechensButton.setForeground(new Color(223, 149, 70));
+        zeitDesStechensButton.setBounds(180, 190, 490, 300);
+        zeitDesStechensButton.addActionListener(e -> {
+
             ueberstundenBalanceScreen();
         });
         backgroundPanel.add(ueberstundenBalanceButton);
+        backgroundPanel.add(zeitDesStechensButton);
     }
+
+    //--------------------------------------------------------------------------------------------------------------------
 
     public void drawTextWithOutline(Graphics g, String text, int x, int y) {
         Graphics2D g2d = (Graphics2D) g;
-
 
         Font font = loadCustomFont("C:/Users/Alina Baum/Downloads/invasion2000//INVASION2000.TTF", Font.BOLD | Font.ITALIC, 65);
         g2d.setFont(font);
@@ -86,8 +103,6 @@ public class Zeitrechner extends JFrame {
         g2d.drawString(text, x + 2, y - 2); // Oben rechts
         g2d.drawString(text, x - 2, y + 3); // Unten links
         g2d.drawString(text, x + 2, y + 3); // Unten rechts
-
-
         g2d.setColor(new Color(223, 149, 70));
         g2d.drawString(text, x, y);
     }
@@ -122,6 +137,7 @@ public class Zeitrechner extends JFrame {
             return new Font("Serif", Font.PLAIN, 12);
         }
     }
+
     public void berechneFeierabendZeit() {
         int ankunftsStunden = Integer.parseInt(ankunftsStundenField.getText());
         int ankunftsMinuten = Integer.parseInt(ankunftsMinutenField.getText());
@@ -155,6 +171,24 @@ public class Zeitrechner extends JFrame {
     }
 
     public void ueberstundenBalanceScreen() {
+        //TODO
+        backgroundPanel.setVisible(false);
+        if(zeitDesStechensButton.isSelected()){
+
+            ImageIcon backgroundImage = new ImageIcon("background.png");
+
+            JPanel backgroundPanelStechen = new JPanel() {
+                @Override
+                protected void paintComponent(Graphics g) {
+                    super.paintComponent(g);
+                    g.drawImage(backgroundImage.getImage(), 0, 0, getWidth(), getHeight(), this);
+                }
+            };
+            backgroundPanelStechen.setLayout(null);
+            setContentPane(backgroundPanelStechen);
+        }else{
+
+        }
 
     }
 
